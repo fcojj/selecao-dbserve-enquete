@@ -1,4 +1,4 @@
-# selecao-dbserve-enquete
+# selecao-dbserver-enquete
 Teste técnico para vaga de desenvolvimento na DBServer: sistema web para escolha do local onde funcionários de uma empresa irão almoçar. 
 
 #Tecnologias e ferramentas utilizadas no sistema desenvolvido:
@@ -25,6 +25,6 @@ Teste técnico para vaga de desenvolvimento na DBServer: sistema web para escolh
 
 Para subir a aplicação será necessário o SGBD MySQL e alterar os seguintes dados de conexão no arquivo aplication.properties no caminho enquete\src\main\resources:
 
-•	spring.datasource.url=jdbc:mysql://localhost/enquete?createDatabaseIfNotExist=true&useSSL=false
-•	spring.datasource.username=root
-•	spring.datasource.password=qwe123
+ - spring.datasource.url=jdbc:mysql://localhost/enquete?createDatabaseIfNotExist=true&useSSL=false
+ - spring.datasource.username=root
+ - spring.datasource.password=qwe123
