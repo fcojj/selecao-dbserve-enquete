@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/LayoutPadrao">
+	
+<head>
+	<title>Votar</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Registrando voto
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${mensagem}"></span>
+		</div>
+	
+		<form method="POST" th:object="${vote}" class="form-vertical  js-form-loading" th:action="@{/votes/new}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}">Já existe voto registrado para essa data.<br/> Por favor, escolha outra data.</span>
+					</div>
+				</th:block>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group" >
+					<label for="voteDate" class="control-label">Escolha o dia do almoço</label>
+					<input id="voteDate" type="text" class="form-control" th:field="*{{voteKey.voteDate}}"/>
+				</div>
+				<div class="form-group">
+				    <label for="estabelecimento" class="control-label">Escolha o estabelecimento</label>
+				    <div class="funkyradio">
+				        <div class="funkyradio-success" th:each="establishment : ${establishments}">
+				         	<input type="radio"  th:field="*{establishment}" th:value="${establishment}"/>
+				            <label  th:for="${#ids.prev('establishment')}" th:text="|${establishment.name} - ${establishment.phone}|" ></label>
+				        </div>
+					</div>
+				 	<input type="hidden" th:value="${{#authentication.name}}" id="voteKey.user" name="voteKey.user"/>
+				 </div>
+				 
+				<div class="form-group">
+					<button class="btn  btn-primary" type="submit">Salvar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</section>
+<th:block layout:fragment="javascript-extra"></th:block>
+
+</body>
+</html>

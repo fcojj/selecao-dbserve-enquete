@@ -1,0 +1,1 @@
+REPLACE INTO `enquete`.`votacao` (`data`, `estabelecimento_id`, `usuario_id`) VALUES ('2016/08/12', '1', '1');
