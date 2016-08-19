@@ -1,8 +1,10 @@
 package com.github.enquete.config;
 
+import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -30,9 +32,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Value("${spring.datasource.username}")
 	private String connectionUsername;
-
-	@Value("${spring.datasource.password}")
-	private String connectionPassword;
+	
 
 	/**
 	 * Tratamento de erros de páginas, dependendo do error faz um request para o path especificado,
@@ -55,16 +55,25 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		 registry.addRedirectViewController("/", "/votes/new");
 	}
+	
+	
+	@Bean
+    ServletRegistrationBean h2servletRegistration(){
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        
+        return registrationBean;
+    }
 
 	@Bean(name = "dataSource")
 	public DriverManagerDataSource dataSource() {
 
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 
-		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		driverManagerDataSource.setDriverClassName("org.h2.Driver");
 		driverManagerDataSource.setUrl(connectionUrl);
 		driverManagerDataSource.setUsername(connectionUsername);
-		driverManagerDataSource.setPassword(connectionPassword);
+		driverManagerDataSource.setPassword("");
 
 		return driverManagerDataSource;
 	}

@@ -1,4 +1,4 @@
-CREATE TABLE  IF NOT EXISTS `enquete`.`tipo_usuario`(
+CREATE TABLE  IF NOT EXISTS `tipo_usuario`(
   user_role_id int(11) NOT NULL AUTO_INCREMENT,
   username_id int(11) NOT NULL,
   role varchar(45) NOT NULL,

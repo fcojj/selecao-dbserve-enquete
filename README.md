@@ -16,15 +16,15 @@ Teste técnico para vaga de desenvolvimento na DBServer: sistema web para escolh
 - JQuery UI;
 - Java 8;
 - Javascript;
-- MySQL SGBD
+- H2 DATABASE
 - MySQl Workbench – Modelagem MER
 - SQL
 - IDE Spring Tool Suite
 
 #Informações para uso
 
-Para subir a aplicação será necessário o SGBD MySQL e alterar os seguintes dados de conexão no arquivo aplication.properties no caminho enquete\src\main\resources:
-
- - spring.datasource.url=jdbc:mysql://localhost/enquete?createDatabaseIfNotExist=true&useSSL=false
- - spring.datasource.username=root
- - spring.datasource.password=qwe123
+Aplicação utilizando H2 Database, banco em memória que sobe junto com a aplicação.
+Link usado para acesso do console client H2 Database:
+ - http://localhost:8080/console
+ Link da aplicação:
+- http://localhost:8080/login

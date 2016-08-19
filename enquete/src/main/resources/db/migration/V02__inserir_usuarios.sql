@@ -1,1 +1,1 @@
-REPLACE INTO `enquete`.`usuario` (`id`, `username`, `password`, `enabled`) VALUES ('1', 'francisco', 'francisco',true), ('2', 'juliana', 'juliana', true), ('3', 'cateriny', 'cateriny', true);
+INSERT INTO usuario  ( id ,  username ,  password ,  enabled ) VALUES ('1', 'francisco', 'francisco',true), ('2', 'juliana', 'juliana', true), ('3', 'cateriny', 'cateriny', true);

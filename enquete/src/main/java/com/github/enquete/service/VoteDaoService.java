@@ -69,19 +69,23 @@ public class VoteDaoService {
 		Date currentyDate = formatedDate(dateSelection);
 		Date firstDayWeek = getFirstDayWeek(currentyDate);
 		List<EstablishmentCalculationVotes> establishmentCalculationVotesList = establishmentWinnerDao.resultByDate(firstDayWeek, currentyDate);
-		//EstablishmentCalculationVotes establishmentWinner = new EstablishmentCalculationVotes();
-		//establishmentWinner.setDate(currentyDate);
 		EstablishmentCalculationVotes establishmentWinner = createEstablishmentWinnerDummy(currentyDate); 
 		
 		//seleciona o estabelecimento com mais votos no dia especificado no filtro
 		for (EstablishmentCalculationVotes establishment: establishmentCalculationVotesList) {
 			if(isEstablishmentWinner(currentyDate, establishmentWinner, establishment)){
-				establishmentWinner = establishment;
+				if(establishmentWinner.getVotesAmount() == establishment.getVotesAmount()){//empate
+					establishmentWinner = createEstablishmentWinnerDummy(currentyDate);//resultado inconclusivo
+				}else{
+					establishmentWinner = establishment;
+				}
 			}
 		}
+		
+		
 		/**
 		 * verifica se esse estabelecimento já foi escolhido essa semana,
-		 * caso sim o resultado da votação é inconclusiva, pois o mesmo estabelcimento não pode ser repetido duas vezes na semana.
+		 * caso sim o resultado da votação é inconclusivo, pois o mesmo estabelcimento não pode ser repetido duas vezes na semana.
 		 */
 		establishmentCalculationVotesList.remove(establishmentWinner);
 		for (EstablishmentCalculationVotes establishment: establishmentCalculationVotesList) {
@@ -112,7 +116,7 @@ public class VoteDaoService {
 		EstablishmentCalculationVotes establishmentWinner;
 		establishmentWinner = new EstablishmentCalculationVotes();
 		Establishment establishment = new Establishment();
-		establishment.setName("Resultado inconclusivo");
+		establishment.setName("resultado inconclusivo");
 		establishmentWinner.setEstablishment(establishment);
 		establishmentWinner.setDate(currentyDate);
 		return establishmentWinner;

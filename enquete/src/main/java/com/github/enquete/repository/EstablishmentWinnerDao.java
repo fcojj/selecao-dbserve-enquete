@@ -40,7 +40,7 @@ public class EstablishmentWinnerDao {
          sb.append("GROUP BY dateVote, nameEstablishment, idEstablishment, phoneEstablishment ");
          sb.append("ORDER BY dateVote");
 
-         SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+         SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
          Object[] paramenters = new Object[]{ formatterDate.format(begin) , formatterDate.format(end)};
          List<Map<String, Object>> list = jdbcTemplate.queryForList(sb.toString(), paramenters);  
          List<EstablishmentCalculationVotes>  establishmentCalculationVotesList = new ArrayList<EstablishmentCalculationVotes>();
