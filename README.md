@@ -25,6 +25,6 @@ Teste técnico para vaga de desenvolvimento na DBServer: sistema web para escolh
 
 Aplicação utilizando H2 Database, banco em memória que sobe junto com a aplicação.
 Link usado para acesso do console client H2 Database:
- - http://localhost:8080/console
- Link da aplicação:
+- http://localhost:8080/console
+Link da aplicação:
 - http://localhost:8080/login
